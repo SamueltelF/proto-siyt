@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="" content="">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css"/>
+  </head>
+  <body>
+    <section>
+    <h1>Protocolo de senha</h1>
+    <p>digite a senha para a ação ser sucedida</p>
+    
+    <label for="senha">Senha:</label>
+    <input type="text" id="senha"/>
+    <br>
+    <button class="btn" id="carregar">Verificar</button>
+    <br>
+    <div class="loader" id="loader" style="display: none;">
+      <div class="progress"></div>
+    </div>
+    <div class="message" id="message"></div>
+    </section>
+    <script>
+      var btcarregar = document.getElementById('carregar');
+var loader = document.getElementById('loader');
+var progressElement = document.querySelector('.progress');
+var messageElement = document.getElementById('message');
+
+btcarregar.addEventListener('click', function() {
+  loader.style.display = 'block';
+  messageElement.textContent = '';
+
+  var progresso = 0;
+  var velocidade = 200;
+
+  var intervalo = setInterval(function() {
+    progresso += 1;
+    progressElement.style.width = progresso + '%';
+
+    if (progresso >= 100) {
+      clearInterval(intervalo);
+      animateText('Carregamento concluído!.\n Ativado o protocolo 007 MMA para todo o\n planeta terra. Sucedida ');
+    }
+  }, velocidade);
+
+  function animateText(text) {
+    var characters = text.split('');
+    var index = 0;
+    var delay = 100; // Tempo de atraso entre cada letra (em milissegundos)
+
+    function addNextLetter() {
+      if (index < characters.length) {
+        messageElement.textContent += characters[index];
+        index++;
+        setTimeout(addNextLetter, delay);
+      }
+    }
+
+    addNextLetter();
+  }
+});
+
+      </script>
+  </body>
+</html>
